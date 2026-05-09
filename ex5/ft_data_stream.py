@@ -5,6 +5,7 @@ PLAYERS: list[str] = ["alice", "bob", "charlie", "dylan"]
 ACTIONS: list[str] = ["run", "jump", "eat", "sleep",
                       "move", "climb", "swim", "grab", "use", "release"]
 
+
 def gen_event() -> Generator[tuple[str, str], None, None]:
     while True:
         name = random.choice(PLAYERS)
