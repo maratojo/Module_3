@@ -24,12 +24,16 @@ if __name__ == "__main__":
 
     args = sys.argv[1:]
     inventory = parse(args)
+    if not inventory:
+        print("Inventory is empty.")
+        exit()
     print(f"Got inventory: {inventory}")
-    items = list(inventory.keys())
+    items = list(dict.keys(inventory))
     print(f"Item list: {items}")
-    quantity = sum(inventory.values())
+    quantity = sum(dict.values(inventory))
     print(f"Total quantity of the {len(items)} items: {quantity}")
-    for item, qty in inventory.items():
+    for item in items:
+        qty = inventory[item]
         porcent: float = round((qty / quantity) * 100, 1)
         print(f"Item {item} represents {porcent}%")
 
@@ -47,5 +51,5 @@ if __name__ == "__main__":
             least_qty = inventory[item]
             least = item
     print(f"Item most abundant: {least} with quantity {least_qty}")
-    inventory.update({"magic_item": 1})
+    dict.update(inventory, {"magic_item": 1})
     print(f"Updated inventory: {inventory}")

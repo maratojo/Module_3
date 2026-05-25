@@ -3,7 +3,7 @@ import sys
 
 if __name__ == "__main__":
     print("=== Player Score Analytics ===")
-    stock_score = []
+    stock_score: list[int] = []
     args = sys.argv[1:]
     for arg in args:
         try:

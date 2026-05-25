@@ -4,20 +4,17 @@ import math
 def get_player_pos() -> tuple[float, float, float]:
     while True:
         user = input("Enter new coordinates as floats in format 'x,y,z': ")
-
         parts = user.split(",")
-
         if len(parts) != 3:
             print("Invalid syntax")
             continue
-        format = []
+        format: list[float] = []
         try:
             for part in parts:
                 format.append(float(part.strip()))
             return (format[0], format[1], format[2])
         except ValueError as e:
             print(f"Error on parameter '{part.strip()}': {e}")
-
 
 def distance(pos1: tuple[float, float, float],
              pos2: tuple[float, float, float]) -> float:

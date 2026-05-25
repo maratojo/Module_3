@@ -25,31 +25,31 @@ if __name__ == "__main__":
         "Dylan": gen_player_achievements()
     }
 
-    for name, ach in players.items():
-        print(f"Player {name}: {ach}")
+    for name in players:
+        print(f"Player {name}: {players[name]}")
 
     dist_achievement: set[str] = set()
-    for name, ach in players.items():
-        dist_achievement = dist_achievement.union(ach)
+    for name in players:
+        dist_achievement = dist_achievement.union(players[name])
     print(f"\nAll distinct achievements: {dist_achievement}")
 
     common: set[str] = set()
-    for ach in players.values():
+    for name in players:
         if common == set():
-            common = ach
+            common = players[name]
         else:
-            common = common.intersection(ach)
+            common = common.intersection(players[name])
     print(f"\nCommon achievements: {common}\n")
 
-    for name, ach in players.items():
+    for name in players:
         other_player: set[str] = set()
-        for n, a in players.items():
+        for n in players:
             if n != name:
-                other_player = other_player.union(a)
-        unique = ach.difference(other_player)
+                other_player = other_player.union(players[n])
+        unique = players[name].difference(other_player)
         print(f"only {name} has: {unique}")
     print()
-    for name, ach in players.items():
-        all = set(all_achievements)
-        missing = all.difference(ach)
+    for name in players:
+        alls = set(all_achievements)
+        missing = alls.difference(players[name])
         print(f"{name} is missing: {missing}")

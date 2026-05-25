@@ -16,10 +16,11 @@ def gen_event() -> Generator[tuple[str, str], None, None]:
 def consume_event(
         events: list[tuple[str, str]]
         ) -> Generator[tuple[str, str], None, None]:
-    index: int = random.randint(0, len(events) - 1)
-    event_remove: tuple[str, str] = events[index]
-    events.pop(index)
-    yield event_remove
+    while len(events) > 0:
+        index: int = random.randint(0, len(events) - 1)
+        event_remove: tuple[str, str] = events[index]
+        events.pop(index)
+        yield event_remove
 
 
 if __name__ == "__main__":
@@ -35,7 +36,7 @@ if __name__ == "__main__":
         event_list.append(next(stream))
     print(f"Built list of 10 events: {event_list}")
 
-    for i in range(10):
+    for event in consume_event(event_list):
         list_remove: tuple[str, str] = next(consume_event(event_list))
-        print(f"Got event from list: {list_remove}")
+        print(f"Got event from list: {event}")
         print(f"Remains in list: {event_list}")
